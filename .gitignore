@@ -1,0 +1,15 @@
+**/.DS_Store
+**/._.DS_Store
+
+**/.env
+**/._.env
+
+xbackbone/config/
+xbackbone/storage/
+xbackbone/storage/
+xbackbone/php.ini
+
+z_deprecated/paperless-ng/data/
+z_deprecated/paperless-ng/media/
+z_deprecated/podgrab/config/
+z_deprecated/vpn-stack/soulseek/
