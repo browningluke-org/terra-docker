@@ -5,25 +5,35 @@ services:
     image: "traefik:v2.4"
     container_name: "traefik"
     command:
-      #- "--log.level=DEBUG"
-      - "--api.insecure=true"
+      # Globals
+     # - "--log.level=DEBUG"
+      - "--api=true"
+      - "--pilot.token=${PILOT_TOKEN}"
+      # Docker
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+      # Entrypoints
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web-secure.address=:443"
-      - "--providers.file.directory=/configuration/"
-      - "--providers.file.watch=true"
       - "--entrypoints.web.http.redirections.entryPoint.to=web-secure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+      # Providers
+      - "--providers.file.directory=/configuration/"
+      - "--providers.file.watch=true"
     ports:
       - "80:80"
       - "443:443"
-      - "8088:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./config/:/configuration/"
       - "/etc/letsencrypt/:/letsencrypt/"
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`traefik.${REVERSE_HOST}`)"
+      - "traefik.http.routers.api.entrypoints=web-secure"
+      - 'traefik.http.routers.api.service=api@internal'
+      - "traefik.http.routers.api.tls=true"
     networks:
       - reverse
 
