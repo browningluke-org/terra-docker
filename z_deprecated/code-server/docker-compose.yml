@@ -10,11 +10,10 @@ services:
       - TZ=America/Nassau
       - PASSWORD=password #optional
       - SUDO_PASSWORD=password #optional
-      - PROXY_DOMAIN=code.thebritishaccent.net #optional
+      - "PROXY_DOMAIN=code.${REVERSE_HOST}" #optional
     volumes:
-      - ./config:/config
-      - ./data:/data
-      - ../dashmachine0.7:/data/dashmachine
+      - 'NULL:/config'
+      - 'NULL:/data'
     restart: unless-stopped
     labels: 
       - "traefik.enable=true"
