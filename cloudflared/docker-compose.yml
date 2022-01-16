@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  tunnel:
+    build: .
+    container_name: cloudflared
+    environment:
+      - NO_AUTOUPDATE=true
+      - TUNNEL_METRICS=127.0.0.1:35699
+    command:
+      - "tunnel"
+      - "run"
+    ports:
+      - 35699:35699
+    volumes:
+      - './config:/root/.cloudflared/'
+    networks:
+      - reverse
+
+networks:
+  reverse:
+    external:
+      name: reverse
