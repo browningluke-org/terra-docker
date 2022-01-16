@@ -2,7 +2,7 @@ version: '3.3'
 services:
   epicgames-freegames:
     environment:
-      - TZ=America/Nassau
+      - TZ=America/Vancouver
     volumes:
       - '../../volumes/epic-claim/config:/usr/app/config:rw'
     image: charlocharlie/epicgames-freegames

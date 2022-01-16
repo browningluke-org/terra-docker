@@ -13,7 +13,7 @@ services:
     #    - '32413:32413/udp'
     #    - '32414:32414/udp'
     environment:
-        - TZ=America/New_York
+      - TZ=America/Vancouver
         - PLEX_CLAIM
         - 'ADVERTISE_IP=https://plex.thebritishaccent.net/,https://plex.tba.lan/,http://10.8.0.160:32400/'
     volumes:

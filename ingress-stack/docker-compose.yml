@@ -64,7 +64,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Nassau
+      - TZ=America/Vancouver
     volumes:
       - '../../volumes/ingress-stack/config-sonarr:/config'
       - '/mnt/virt/:/data'
@@ -83,7 +83,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Nassau
+      - TZ=America/Vancouver
     volumes:
       - '../../volumes/ingress-stack/config-radarr:/config'
       - '/mnt/virt/:/data'
@@ -101,7 +101,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Nassau
+      - TZ=America/Vancouver
     volumes:
       - '../../volumes/ingress-stack/config-jackett:/config'
     restart: unless-stopped
