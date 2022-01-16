@@ -21,6 +21,12 @@
   [http.services.bookstack.loadBalancer]
     [[http.services.bookstack.loadBalancer.servers]]
       url = "http://10.8.0.109:6875"
+
+
+  [http.services.pihole.loadBalancer]
+    [[http.services.pihole.loadBalancer.servers]]
+      url = "http://10.8.0.166"
+
   
   # Raspi 3
   [http.services.pihole1.loadBalancer]
@@ -36,6 +42,15 @@
     service = "hassio"
 	[http.routers.hassio.tls]
   
+
+  [http.routers.pihole]
+    # won't listen to entry point web
+    entryPoints = ["web-secure"]
+    rule = "Host(`pi.thebritishaccent.net`)"
+    service = "pihole"
+        [http.routers.pihole.tls]
+
+
   [http.routers.gitea]
     # won't listen to entry point web
     entryPoints = ["web-secure"]
