@@ -1,0 +1,26 @@
+version: '3.4'
+services:
+  mkvtoolnix:
+    image: jlesage/mkvtoolnix
+    container_name: mkvtoolnix
+    volumes:
+        - '../../volumes/mkvtoolnix/config:/config:rw'
+        - '../../volumes/mkvtoolnix/data:/storage:rw'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mkvtoolnix.rule=Host(`mkvtoolnix.${REVERSE_HOST}`)"
+      - "traefik.http.routers.mkvtoolnix.entrypoints=web-secure"
+      - "traefik.http.routers.mkvtoolnix.tls=true"
+    networks:
+      - reverse
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5800 || exit 1
+      interval: 15s
+      retries: 5
+      start_period: 10s
+      timeout: 10s
+
+networks:
+  reverse:
+    external:
+      name: reverse
