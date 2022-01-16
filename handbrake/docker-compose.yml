@@ -5,10 +5,10 @@ services:
     ports:
       - "5800:5800"
     volumes:
-      - "./config:/config:rw"
-      - "./home:/storage:ro"
-      - "./watch:/watch:rw"
-      - "./output:/output:rw"
+      - "../../volumes/handbrake/config:/config:rw"
+      - "../../volumes/handbrake/home:/storage:ro"
+      - "../../volumes/handbrake/watch:/watch:rw"
+      - "../../volumes/handbrake/output:/output:rw"
     labels: 
       - "traefik.enable=true"
       - "traefik.http.routers.handbrake.rule=Host(`handbrake.${REVERSE_HOST}`)"

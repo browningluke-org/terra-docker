@@ -17,8 +17,8 @@ services:
         - PLEX_CLAIM
         - 'ADVERTISE_IP=https://plex.thebritishaccent.net/,https://plex.tba.lan/,http://10.8.0.160:32400/'
     volumes:
-        - './config-plex/config:/config'
-        - './config-plex/transcode:/transcode'
+        - '../../volumes/plex-stack/config-plex/config:/config'
+        - '../../volumes/plex-stack/config-plex/transcode:/transcode'
         - '/mnt/virt:/data'     
     image: plexinc/pms-docker
     labels: 

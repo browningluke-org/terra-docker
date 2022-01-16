@@ -1,25 +1,19 @@
 version: '3.3'
 services:
   qbittorrentvpn:
+    image: dyonr/qbittorrentvpn:v4_2_x
     container_name: qbittorrent
+    restart: unless-stopped
     privileged: true
-    volumes:
-        - './config-qbittorrent:/config'
-        - '/mnt/virt:/data'
     environment:
         - VPN_ENABLED=yes
         - VPN_USERNAME
         - VPN_PASSWORD
         - LAN_NETWORK=10.8.0.0/24
         - 'NAME_SERVERS=8.8.8.8'
-        - PUID=1000
-        - PGID=1000
-    healthcheck:
-        test: "[ $$(curl -s \"http://ip-api.com/line?fields=countryCode\") = \"CH\" ]"
-        interval: 30s
-        timeout: 10s
-        retries: 3
-    image: markusmcnugen/qbittorrentvpn
+    volumes:
+        - '../../volumes/ingress-stack/config-qbittorrent:/config'
+        - '/mnt/virt:/data'
     labels: 
       - "traefik.enable=true"
 
@@ -36,26 +30,26 @@ services:
       - "traefik.http.services.soulseek.loadbalancer.server.port=6080"
     networks: 
       - reverse
-  
+
   soulseek:
+    image: realies/soulseek
     container_name: soulseek
     restart: unless-stopped
     depends_on:
       - qbittorrentvpn
-    volumes:
-        - './soulseek/appdata:/data/.SoulseekQt'
-        - './soulseek/downloads:/data/Soulseek Downloads'
-        - '/mnt/virt/Music:/Music'
-        - './soulseek/logs:/data/Soulseek Chat Logs'
     environment:
-        - pgid=1000
-        - puid=1000
-        - resize=scale
-        - resolution=1280x720
+      - pgid=1000
+      - puid=1000
+      - resize=scale
+      - resolution=1280x720
+    volumes:
+        - '../../volumes/ingress-stack/soulseek/appdata:/data/.SoulseekQt'
+        - '../../volumes/ingress-stack/soulseek/downloads:/data/Soulseek Downloads'
+        - '/mnt/virt/Music:/Music'
+        - '../../volumes/ingress-stack/soulseek/logs:/data/Soulseek Chat Logs'
     network_mode: "service:qbittorrentvpn"
     stdin_open: true
     tty: true
-    image: realies/soulseek
     # Curl is not installed in container by default
     # healthcheck:
     #   test: [ $(curl -s "http://ip-api.com/line?fields=countryCode") = "CH" ]
@@ -66,14 +60,14 @@ services:
   sonarr:
     image: linuxserver/sonarr
     container_name: sonarr
+    restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Nassau
     volumes:
-      - ./config-sonarr:/config
-      - /mnt/virt/:/data
-    restart: unless-stopped
+      - '../../volumes/ingress-stack/config-sonarr:/config'
+      - '/mnt/virt/:/data'
     labels: 
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.rule=Host(`sonarr.${REVERSE_HOST}`)"
@@ -85,14 +79,14 @@ services:
   radarr:
     image: linuxserver/radarr
     container_name: radarr
+    restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Nassau
     volumes:
-      - ./config-radarr:/config
-      - /mnt/virt/:/data
-    restart: unless-stopped
+      - '../../volumes/ingress-stack/config-radarr:/config'
+      - '/mnt/virt/:/data'
     labels: 
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.rule=Host(`radarr.${REVERSE_HOST}`)"
@@ -109,7 +103,7 @@ services:
       - PGID=1000
       - TZ=America/Nassau
     volumes:
-      - ./config-jackett:/config
+      - '../../volumes/ingress-stack/config-jackett:/config'
     restart: unless-stopped
     labels: 
       - "traefik.enable=true"

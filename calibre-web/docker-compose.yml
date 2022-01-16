@@ -10,8 +10,8 @@ services:
       - TZ=America/Nassau
       - DOCKER_MODS=linuxserver/calibre-web:calibre
     volumes:
-      - ./config:/config
-      - /mnt/virt/gdrive/crypt/Books:/books
+      - '../../volumes/calibre-web/config:/config'
+      - '/mnt/virt/gdrive/crypt/Books:/books'
     restart: unless-stopped
     labels: 
       - "traefik.enable=true"

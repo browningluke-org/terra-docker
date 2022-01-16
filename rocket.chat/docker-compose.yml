@@ -13,7 +13,7 @@ services:
         done; (exit $$s)"
     restart: unless-stopped
     volumes:
-      - ./uploads:/app/uploads
+      - '../../volumes/rocket.chat/uploads:/app/uploads'
     environment:
       - PORT=3000
       - ROOT_URL=https://chat.thebritishaccent.net
@@ -37,7 +37,7 @@ services:
     image: mongo:4.0
     restart: unless-stopped
     volumes:
-     - ./data/db:/data/db
+     - '../../volumes/rocket.chat/data:/data/db'
      #- ./data/dump:/dump
     command: mongod --smallfiles --oplogSize 128 --replSet rs0 --storageEngine=mmapv1
     networks: 
@@ -69,4 +69,3 @@ networks:
     external:
       name: reverse
   internal:
-    external: false

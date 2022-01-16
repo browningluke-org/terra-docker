@@ -1,9 +1,9 @@
 version: '3.3'
 services:
   huginn:
-    volumes:
-      - './mysql-data:/var/lib/mysql'
     image: huginn/huginn
+    volumes:
+      - '../../volumes/huginn/data:/var/lib/mysql'
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.huginn.rule=Host(`huginn.${REVERSE_HOST}`)"

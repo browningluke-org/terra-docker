@@ -4,7 +4,7 @@ services:
     environment:
       - TZ=America/Nassau
     volumes:
-      - './config:/usr/app/config:rw'
+      - '../../volumes/epic-claim/config:/usr/app/config:rw'
     image: charlocharlie/epicgames-freegames
     labels: 
       - "traefik.enable=true"
