@@ -1,5 +1,5 @@
 ---
-version: "2.1"
+version: "3.4"
 services:
   calibre-web:
     image: ghcr.io/linuxserver/calibre-web
@@ -20,6 +20,12 @@ services:
       - "traefik.http.routers.calibre.tls=true"
     networks: 
       - reverse
+    healthcheck:
+      test: curl --fail http://localhost:8083 || exit 1
+      interval: 15s
+      retries: 5
+      start_period: 120s
+      timeout: 10s
 
 networks:
   reverse:

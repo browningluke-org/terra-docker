@@ -1,5 +1,5 @@
 ---
-version: "2.1"
+version: "3.4"
 services:
   pyload:
     image: linuxserver/pyload
@@ -20,6 +20,12 @@ services:
       - "traefik.http.services.pyload.loadbalancer.server.port=8000"
     networks: 
       - reverse
+    healthcheck:
+      test: curl --fail http://localhost:8000/json/status || exit 1
+      interval: 15s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
 
 networks:
   reverse:

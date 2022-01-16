@@ -1,5 +1,5 @@
 ---
-version: "2"
+version: "3.4"
 services:
   komga:
     image: gotson/komga
@@ -20,6 +20,12 @@ services:
       - "traefik.http.routers.komga.tls=true"
     networks: 
       - reverse
+    healthcheck:
+      test: curl --fail http://localhost:8080/api/v1/claim || exit 1
+      interval: 15s
+      retries: 5
+      start_period: 10s
+      timeout: 10s
 
 networks:
   reverse:
