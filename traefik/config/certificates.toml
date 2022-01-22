@@ -1,3 +1,0 @@
-[[tls.certificates]]
-   certFile = "/letsencrypt/live/thebritishaccent.net-0001/fullchain.pem"
-   keyFile = "/letsencrypt/live/thebritishaccent.net-0001/privkey.pem"
