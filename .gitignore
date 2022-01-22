@@ -4,6 +4,14 @@
 **/.env
 **/._.env
 
+# Keep secrets a secret
+**/acme.json
+**/*.secret
+**/*.pem
+**/*.key
+
+**/*.old
+
 xbackbone/config/
 xbackbone/storage/
 xbackbone/storage/
