@@ -10,6 +10,7 @@ services:
     volumes:
       - ../../volumes/komga/config:/config
       - /mnt/virt/manga:/books
+      - /mnt/virt/gdrive/crypt/stash/manga:/books/smanga
       - /etc/timezone:/etc/timezone
     user: "1000:1000"
     restart: unless-stopped
