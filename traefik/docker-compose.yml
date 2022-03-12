@@ -13,7 +13,7 @@ services:
       - CF_DNS_API_TOKEN_FILE=/run/secrets/CF_DNS_API_TOKEN
     command:
       # Globals
-      - "--log.level=DEBUG"
+      #- "--log.level=DEBUG"
       - "--api=true"
       - "--pilot.token=${PILOT_TOKEN}"
       # Docker
