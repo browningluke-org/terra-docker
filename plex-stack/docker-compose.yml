@@ -26,13 +26,6 @@ services:
         - '/mnt/media/photo:/data-photo'
         - '/mnt/media/video:/data'     
     image: plexinc/pms-docker
-    #hostname: plex.${REVERSE_HOST}
-    # labels: 
-    #   - "traefik.enable=true"
-    #   - "traefik.http.routers.plex.rule=Host(`plex.${REVERSE_HOST}`)"
-    #   - "traefik.http.routers.plex.entrypoints=web-secure"
-    #   - "traefik.http.routers.plex.tls=true"
-    #   - "traefik.http.services.plex.loadbalancer.server.port=32400"
     networks: 
       - reverse
 
