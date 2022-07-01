@@ -19,8 +19,8 @@ services:
       - VERSION=docker
       - 'ADVERTISE_IP=http://10.8.0.160:32400/'
     volumes:
-        - '../../volumes/plex-stack/config-plex/config:/config'
-        - '../../volumes/plex-stack/config-plex/transcode:/transcode'
+        - '${DOCKERHOME}/volumes/plex-stack/config-plex/config:/config'
+        - '${DOCKERHOME}/volumes/plex-stack/config-plex/transcode:/transcode'
         
         - '/mnt/media/audio:/data-audio'
         - '/mnt/media/photo:/data-photo'
