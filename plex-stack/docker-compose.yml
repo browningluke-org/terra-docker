@@ -21,7 +21,10 @@ services:
     volumes:
         - '../../volumes/plex-stack/config-plex/config:/config'
         - '../../volumes/plex-stack/config-plex/transcode:/transcode'
-        - '/mnt/virt:/data'     
+        
+        - '/mnt/media/audio:/data-audio'
+        - '/mnt/media/photo:/data-photo'
+        - '/mnt/media/video:/data'     
     image: plexinc/pms-docker
     #hostname: plex.${REVERSE_HOST}
     # labels: 

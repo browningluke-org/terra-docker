@@ -6,12 +6,13 @@ services:
     container_name: komga
     environment:
       - PUID=1000
-      - PGID=1001
+      - PGID=1000
     volumes:
       - ../../volumes/komga/config:/config
-      - /mnt/virt/manga:/books
-      - /mnt/virt/gdrive/crypt/stash/manga:/books/smanga
       - /etc/timezone:/etc/timezone
+      
+      - /mnt/media/manga:/books
+      - /mnt/crypt-media/manga:/books/smanga
     user: "1000:1000"
     restart: unless-stopped
     labels: 
