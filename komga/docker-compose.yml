@@ -12,12 +12,12 @@ services:
       - /etc/timezone:/etc/timezone
       
       - /mnt/media/manga:/books
-      - /mnt/crypt-media/manga:/books/smanga
+      - /opt/gocrypt/media/manga:/books/smanga
     user: "1000:1000"
     restart: unless-stopped
     labels: 
       - "traefik.enable=true"
-      - "traefik.http.routers.komga.rule=Host(`komga.${REVERSE_HOST}`)"
+      - "traefik.http.routers.komga.rule=Host(`m.${REVERSE_HOST}`)"
       - "traefik.http.routers.komga.entrypoints=web-secure"
       - "traefik.http.routers.komga.tls=true"
     networks: 
