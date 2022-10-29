@@ -19,7 +19,7 @@ services:
       ## Keep configs here.
       - "${DOCKERHOME}/volumes/stash-stack/config:/root/.stash"
       ## Point this at your collection.
-      - /mnt/crypt-media:/data
+      - /opt/gocrypt/media:/data
       ## This is where your stash's metadata lives
       - "${DOCKERHOME}/volumes/stash-stack/metadata:/metadata"
       ## Any other cache content.
